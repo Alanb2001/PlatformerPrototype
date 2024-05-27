@@ -101,9 +101,15 @@ public class Enemy : MonoBehaviour
         
         transform.LookAt(player);
 
+        var healthComponent = player.GetComponent<UnitHealth>();
+        
         if (!alreadyAttacked)
         {
             alreadyAttacked = true;
+            if (healthComponent != null)
+            {
+                healthComponent.TakeDamage(1);
+            }
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
