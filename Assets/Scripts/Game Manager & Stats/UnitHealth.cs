@@ -16,8 +16,6 @@ public class UnitHealth : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
-
-        print(currentHealth);
         
         if (currentHealth <= 0)
         {

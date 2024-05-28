@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     // Attacking
     public float timeBetweenAttacks;
     private bool alreadyAttacked;
+    public int attackDamage;
     
     // States
     public float sightRange, attackRange;
@@ -108,7 +109,7 @@ public class Enemy : MonoBehaviour
             alreadyAttacked = true;
             if (healthComponent != null)
             {
-                healthComponent.TakeDamage(1);
+                healthComponent.TakeDamage(attackDamage);
             }
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
