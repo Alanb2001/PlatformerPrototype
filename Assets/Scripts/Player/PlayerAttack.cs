@@ -1,20 +1,38 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private void OnTriggerStay(Collider other)
+    private bool canHit;
+    private UnitHealth healthComponent;
+
+    private void Update()
     {
-        var healthComponent = other.GetComponent<UnitHealth>();
-        
-        if (Input.GetMouseButtonDown(0) && other.gameObject.CompareTag("Enemy"))
+        if (canHit)
         {
-            if (healthComponent != null)
+            if (Input.GetMouseButtonDown(0))
             {
-                healthComponent.TakeDamage(1);
+                if (healthComponent != null)
+                {
+                    healthComponent.TakeDamage(1);
+                }
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            healthComponent = other.GetComponent<UnitHealth>();
+            canHit = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            canHit = false;
         }
     }
 }

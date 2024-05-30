@@ -23,8 +23,6 @@ public class GameManager : MonoBehaviour
     {
         coinsInLevel = FindObjectsOfType<Coin>().Length;
 
-        print(coinsInLevel);
-
         DontDestroyOnLoad(this);
     }
     
