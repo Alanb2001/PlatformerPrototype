@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -12,9 +9,11 @@ public class PlayerMovement : MonoBehaviour
 
     public float jumpForce;
     public float jumpCooldown;
+    public int numberOfJumps;
+    public int maxNumberOfJumps;
     public float airMultiplier;
     private bool readyToJump;
-
+    
     [Header("Keybinds")] 
     public KeyCode jumpKey = KeyCode.Space;
     
@@ -36,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        
         rigidBody.freezeRotation = true;
 
         readyToJump = true;
@@ -47,12 +47,15 @@ public class PlayerMovement : MonoBehaviour
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundLayer);
         
         PlayerInput();
+        
         SpeedControl();
         
         // Handle drag
         if (grounded)
         {
             rigidBody.drag = groundDrag;
+            
+            numberOfJumps = 0;
         }
         else
         {
@@ -76,7 +79,16 @@ public class PlayerMovement : MonoBehaviour
             readyToJump = false;
             
             Jump();
-
+            
+            Invoke(nameof(ResetJump), jumpCooldown);
+        }
+        
+        if (Input.GetKey(jumpKey) && readyToJump && !grounded)
+        {
+            readyToJump = false;
+            
+            Jump();
+            
             Invoke(nameof(ResetJump), jumpCooldown);
         }
     }
@@ -90,6 +102,8 @@ public class PlayerMovement : MonoBehaviour
         if (grounded)
         {
             rigidBody.AddForce(moveDirection.normalized * (moveSpeed * 10.0f), ForceMode.Force);
+            
+            readyToJump = true;
         }
         else if (!grounded)
         {
@@ -111,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        //  Reset y velocity
+        // Reset y velocity
         rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0.0f, rigidBody.velocity.z);
         
         rigidBody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
@@ -120,5 +134,14 @@ public class PlayerMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+
+        numberOfJumps++;
+
+        if (numberOfJumps >= maxNumberOfJumps)
+        {
+            readyToJump = false;
+            
+            numberOfJumps = 0;
+        }
     }
 }
