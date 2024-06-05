@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4588897658986621735}
   - component: {fileID: 857340035070435017}
   - component: {fileID: 5973352098950765396}
-  - component: {fileID: 2468598335702682104}
+  - component: {fileID: 3264318934454830671}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -156,12 +156,12 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 5
   timeBetweenAttacks: 1
-  attackDamage: 0
+  attackDamage: 1
   sightRange: 20
   attackRange: 3
   playerInSightRange: 0
   playerInAttackRange: 0
---- !u!114 &2468598335702682104
+--- !u!114 &3264318934454830671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 887226604281920080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b55857f067b6f94bafc60f1a66c0807, type: 3}
+  m_Script: {fileID: 11500000, guid: 38ccf1a4c425e4c4e9d0af4354fac76a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0

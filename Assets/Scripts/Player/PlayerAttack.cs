@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     private bool canHit;
-    private UnitHealth healthComponent;
+    private EnemyHealth healthComponent;
 
     private void Update()
     {
@@ -23,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            healthComponent = other.GetComponent<UnitHealth>();
+            healthComponent = other.GetComponent<EnemyHealth>();
             canHit = true;
         }
     }
