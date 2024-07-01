@@ -22,7 +22,6 @@ public class PlayerHealth : MonoBehaviour
             gameObject.GetComponent<PlayerAttack>().enabled = false;
             
             StartCoroutine(LevelChange());
-            print("Player is dead");
         }
     }
     

@@ -7,7 +7,6 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pausePanel;
     
-    // Update is called once per frame
     void Update()
     {
         Pause();
@@ -17,7 +16,6 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            print("Hello");
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             pausePanel.SetActive(true);
@@ -31,5 +29,10 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
         pausePanel.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 }
